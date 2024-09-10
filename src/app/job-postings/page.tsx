@@ -1,6 +1,6 @@
 "use client";
 import { JobPostings } from "@/components/job-postings";
 
-export default function Home() {
+export default function JobPostingsPage() {
   return <JobPostings />;
 }
