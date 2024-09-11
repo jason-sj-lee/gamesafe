@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Shield, Mail, Lock } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import Link from "next/link";
 
 export default function Login() {

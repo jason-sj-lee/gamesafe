@@ -21,7 +21,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Shield,
   User,
   Mail,
   Lock,

@@ -26,9 +26,7 @@ import {
   Clock,
   Search,
   Filter,
-  Shield,
 } from "lucide-react";
-import Link from "next/link";
 
 // Mock data for job postings
 const mockJobs = [

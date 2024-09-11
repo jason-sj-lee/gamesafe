@@ -20,8 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Shield, Briefcase, MapPin, Calendar, DollarSign } from "lucide-react";
-import Link from "next/link";
+import { Briefcase, MapPin, Calendar, DollarSign } from "lucide-react";
 
 export default function CreateJobPosting() {
   const [title, setTitle] = useState("");
