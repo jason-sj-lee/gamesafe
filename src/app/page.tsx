@@ -19,6 +19,7 @@ import {
   Award,
   ClipboardCheck,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function LandingPage() {
   return (
@@ -48,12 +49,14 @@ export default function LandingPage() {
                     className="flex-grow"
                   />
                   <Input placeholder="Location" className="w-1/4" />
-                  <Button
-                    type="submit"
-                    className="bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    <Search className="mr-2 h-4 w-4" /> Find Opportunities
-                  </Button>
+                  <Link href="job-postings">
+                    <Button
+                      type="submit"
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      <Search className="mr-2 h-4 w-4" /> Find Opportunities
+                    </Button>
+                  </Link>
                 </form>
               </CardContent>
             </Card>
