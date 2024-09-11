@@ -38,12 +38,17 @@ export default function RootLayout({
               <h1 className="text-2xl font-bold text-green-800">Gamesafe</h1>
             </Link>
             <nav>
-              <Button variant="ghost" className="mr-2 text-zinc-700">
-                Login
-              </Button>
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
-                Sign Up
-              </Button>
+              <Link href="/login">
+                <Button variant="ghost" className="mr-2 text-zinc-700">
+                  Login
+                </Button>
+              </Link>
+
+              <Link href="/signup">
+                <Button className="bg-green-600 hover:bg-green-700 text-white">
+                  Sign Up
+                </Button>
+              </Link>
             </nav>
           </header>
 
