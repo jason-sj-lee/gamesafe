@@ -86,7 +86,7 @@ export default function Login() {
               Forgot password?
             </Button>
             <div className="text-sm text-gray-600">
-              Don't have an account?{" "}
+              {"Don't have an account?"}
               <Link
                 href="/signup"
                 className="text-green-600 hover:text-green-700 font-semibold"
