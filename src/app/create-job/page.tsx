@@ -1,4 +1,4 @@
-import { CreateJobForm } from "@/components/jobs/create-job-form";
+import { CreateJobForm } from "@/components/forms/create-job-form";
 import {
   Card,
   CardContent,
