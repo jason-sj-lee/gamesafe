@@ -1,12 +1,11 @@
 import { Button } from "@/app/ui/button";
 import { Input } from "@/app/ui/input";
 import { Label } from "@/app/ui/label";
-import { Checkbox } from "@/app/ui/checkbox";
 import Link from "next/link";
 import Logo from "@/app/ui/gamesafe-logo";
-import { login } from "./actions";
+import { signup } from "./actions";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE] flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-md">
@@ -19,10 +18,10 @@ export default function LoginPage() {
 
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h1 className="text-2xl font-bold text-[#006D77] mb-6 text-center">
-            Log in to your account
+            Create an account
           </h1>
 
-          <form action={login} className="space-y-6">
+          <form action={signup} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="username" className="text-[#006D77]">
                 Username
@@ -49,43 +48,22 @@ export default function LoginPage() {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Checkbox
-                  id="remember"
-                  className="border-[#83C5BE] text-[#E29578] focus:ring-[#E29578]"
-                />
-                <Label
-                  htmlFor="remember"
-                  className="ml-2 text-sm text-[#006D77]"
-                >
-                  Remember me
-                </Label>
-              </div>
-              <Link
-                href="/forgot-password"
-                className="text-sm text-[#E29578] hover:underline"
-              >
-                Forgot password?
-              </Link>
-            </div>
-
             <Button
               type="submit"
               className="w-full bg-[#E29578] hover:bg-[#D88469] text-[#006D77] font-semibold"
             >
-              Log in
+              Sign up
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-[#006D77]">
-              Don't have an account?{" "}
+              Already have an account?{" "}
               <Link
-                href="/signup"
+                href="/login"
                 className="text-[#E29578] hover:underline font-semibold"
               >
-                Sign up
+                Log in
               </Link>
             </p>
           </div>

@@ -2,8 +2,12 @@ import Logo from "./ui/gamesafe-logo";
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 import Image from "next/image";
+import { validateRequest } from "@/lib/validate";
+import { logout } from "./actions";
 
-export default function Page() {
+export default async function Page() {
+  const { user } = await validateRequest();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE]">
       <header className="bg-[#006D77] p-4 shadow-md ">
@@ -13,17 +17,29 @@ export default function Page() {
             <span className="text-white text-2xl font-bold">Gamesafe</span>
           </Link>
           <nav>
-            <Link href="/login ">
-              <Button
-                variant="ghost"
-                className="text-white hover:text-[#E29578] mr-2"
-              >
-                Login
-              </Button>
-            </Link>
-            <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77]">
-              Sign Up
-            </Button>
+            {!user ? (
+              <>
+                <Link href="/login ">
+                  <Button
+                    variant="ghost"
+                    className="text-white hover:text-[#E29578] mr-2"
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup ">
+                  <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77]">
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <form action={logout}>
+                <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77]">
+                  Logout
+                </Button>
+              </form>
+            )}
           </nav>
         </div>
       </header>
@@ -42,15 +58,19 @@ export default function Page() {
               events, ensuring safety and peak performance.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77] text-lg px-8 py-3">
-                Find a Therapist
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-transparent border-2 border-[#E29578] text-[#E29578] hover:bg-[#E29578] hover:text-[#006D77] text-lg px-8 py-3"
-              >
-                Post an Event
-              </Button>
+              <Link href={user ? "/" : "/login"}>
+                <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77] text-lg px-8 py-3">
+                  Find a Therapist
+                </Button>
+              </Link>
+              <Link href={user ? "/" : "/login"}>
+                <Button
+                  variant="outline"
+                  className="bg-transparent border-2 border-[#E29578] text-[#E29578] hover:bg-[#E29578] hover:text-[#006D77] text-lg px-8 py-3"
+                >
+                  Post an Event
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 relative">
