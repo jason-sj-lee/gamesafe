@@ -15,14 +15,25 @@ import { DatePicker } from "@/app/ui/date-picker";
 import Link from "next/link";
 import Logo from "@/app/ui/gamesafe-logo";
 import { useState } from "react";
+import { createJob } from "./actions";
 
 export default function Page() {
   const [eventDate, setEventDate] = useState<Date | undefined>(undefined);
   const [deadline, setDeadline] = useState<Date | undefined>(undefined);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted");
+    const formData = new FormData(event.currentTarget);
+
+    // Append eventDate and deadline to the form data
+    if (eventDate) {
+      formData.append("eventDate", eventDate.toISOString());
+    }
+    if (deadline) {
+      formData.append("deadline", deadline.toISOString());
+    }
+
+    await createJob(formData);
   };
 
   return (
@@ -35,7 +46,7 @@ export default function Page() {
           </Link>
           <nav>
             <Button variant="ghost" className="text-white hover:text-[#E29578]">
-              Dashboard
+              Profile
             </Button>
             <Button variant="ghost" className="text-white hover:text-[#E29578]">
               Logout

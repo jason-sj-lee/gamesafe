@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, date } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("user", {
   id: text("id").primaryKey(),
@@ -15,4 +15,15 @@ export const sessionTable = pgTable("session", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
+});
+
+export const jobPostTable = pgTable("job_post", {
+  id: text("id").primaryKey(),
+  title: text("title"),
+  eventType: text("eventType"),
+  eventDate: date("eventDate"),
+  location: text("location"),
+  description: text("description"),
+  compensation: text("compensation"),
+  deadline: date("deadline"),
 });

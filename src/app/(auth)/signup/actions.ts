@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/db";
 import { hash } from "@node-rs/argon2";
 import { cookies } from "next/headers";
@@ -6,10 +8,7 @@ import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { userTable } from "@/db/schema";
 
-export default async function Page() {}
-
 export async function signup(formData: FormData) {
-  "use server";
   const username = formData.get("username");
   // username must be between 4 ~ 31 characters, and only consists of lowercase letters, 0-9, -, and _
   // keep in mind some database (e.g. mysql) are case insensitive

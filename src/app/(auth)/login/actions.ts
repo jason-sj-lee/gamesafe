@@ -1,3 +1,5 @@
+"use server";
+
 import { verify } from "@node-rs/argon2";
 import { cookies } from "next/headers";
 import { lucia } from "@/lib/auth";
@@ -6,10 +8,7 @@ import { db } from "@/db";
 import { userTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export default async function Page() {}
-
 export async function login(formData: FormData) {
-  "use server";
   const username = formData.get("username");
   if (
     typeof username !== "string" ||
