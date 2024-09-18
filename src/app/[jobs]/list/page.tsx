@@ -10,78 +10,11 @@ import {
 import { Badge } from "@/app/ui/badge";
 import Link from "next/link";
 import Logo from "@/app/ui/gamesafe-logo";
+import { db } from "@/db";
+import { jobPostTable } from "@/db/schema";
 
-// This would typically come from an API or database
-const jobListings = [
-  {
-    id: 1,
-    title: "Sports Therapist for Marathon",
-    organizer: "City Runners Club",
-    date: "2023-08-15",
-    location: "Central Park, New York",
-    description:
-      "Seeking experienced sports therapist for our annual marathon. Must be able to provide pre and post-race therapy.",
-    eventType: "Marathon",
-    compensation: "$500",
-  },
-  {
-    id: 2,
-    title: "Physiotherapist for Football Tournament",
-    organizer: "Regional Football Association",
-    date: "2023-09-02",
-    location: "Stamford Bridge, London",
-    description:
-      "Looking for a qualified physiotherapist to support players during our weekend tournament.",
-    eventType: "Football",
-    compensation: "£400",
-  },
-  {
-    id: 3,
-    title: "Athletic Therapist for Swimming Competition",
-    organizer: "National Aquatics Center",
-    date: "2023-07-20",
-    location: "Olympic Pool, Sydney",
-    description:
-      "Need an athletic therapist specializing in aquatic sports for our national swimming competition.",
-    eventType: "Swimming",
-    compensation: "AU$600",
-  },
-  {
-    id: 4,
-    title: "Sports Massage Therapist for Cycling Event",
-    organizer: "Tour de France Organization",
-    date: "2023-07-01",
-    location: "Various locations, France",
-    description:
-      "Seeking a sports massage therapist to join our medical team for the duration of the Tour de France.",
-    eventType: "Cycling",
-    compensation: "€5000",
-  },
-  {
-    id: 5,
-    title: "Rehabilitation Specialist for Tennis Tournament",
-    organizer: "Wimbledon Championship",
-    date: "2023-07-03",
-    location: "All England Club, London",
-    description:
-      "Looking for a rehabilitation specialist to assist players during the Wimbledon Championship.",
-    eventType: "Tennis",
-    compensation: "£3000",
-  },
-  {
-    id: 6,
-    title: "Athletic Trainer for Basketball League",
-    organizer: "National Basketball Association",
-    date: "2023-10-15",
-    location: "Various cities, USA",
-    description:
-      "Seeking an experienced athletic trainer to work with professional basketball players throughout the season.",
-    eventType: "Basketball",
-    compensation: "$80,000/year",
-  },
-];
-
-export default function Page() {
+export default async function Page() {
+  const jobListings = await db.select().from(jobPostTable);
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE]">
       <header className="bg-[#006D77] p-4 shadow-md">
@@ -110,12 +43,12 @@ export default function Page() {
             <Card key={job.id} className="bg-white">
               <CardHeader>
                 <CardTitle>{job.title}</CardTitle>
-                <CardDescription>{job.organizer}</CardDescription>
+                {/* <CardDescription>{job.organizer}</CardDescription> */}
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2 mb-2">
                   <Badge variant="secondary">{job.eventType}</Badge>
-                  <span className="text-sm text-gray-500">{job.date}</span>
+                  <span className="text-sm text-gray-500">{job.eventDate}</span>
                 </div>
                 <p className="text-sm mb-2">{job.description}</p>
                 <div className="flex items-center space-x-2">
