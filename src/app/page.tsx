@@ -1,16 +1,15 @@
-import Logo from "./ui/gamesafe-logo";
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 import Image from "next/image";
 import { validateRequest } from "@/lib/validate";
-import { logout } from "./actions";
+import { NavBar } from "./ui/NavBar";
 
 export default async function Page() {
   const { user } = await validateRequest();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE]">
-      <header className="bg-[#006D77] p-4 shadow-md ">
+      {/* <header className="bg-[#006D77] p-4 shadow-md ">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <Logo className="w-10 h-10 text-[#E29578]" />
@@ -42,7 +41,8 @@ export default async function Page() {
             )}
           </nav>
         </div>
-      </header>
+      </header> */}
+      <NavBar user={user} />
 
       <main className="container mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -58,9 +58,9 @@ export default async function Page() {
               events, ensuring safety and peak performance.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href={user ? "/" : "/login"}>
+              <Link href={user ? "/jobs/list" : "/login"}>
                 <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77] text-lg px-8 py-3">
-                  Find a Therapist
+                  Find an Event
                 </Button>
               </Link>
               <Link href={user ? "/" : "/login"}>
