@@ -10,7 +10,11 @@ import { eq } from "drizzle-orm";
 
 export async function login(formData: FormData) {
   const email = formData.get("email");
-
+  if (typeof email !== "string" || !/^[a-z0-9_-]+$/.test(email)) {
+    return {
+      error: "Invalid email",
+    };
+  }
   const password = formData.get("password");
   if (
     typeof password !== "string" ||
