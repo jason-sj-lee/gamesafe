@@ -9,17 +9,8 @@ import { userTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function login(formData: FormData) {
-  const username = formData.get("username");
-  if (
-    typeof username !== "string" ||
-    username.length < 3 ||
-    username.length > 31 ||
-    !/^[a-z0-9_-]+$/.test(username)
-  ) {
-    return {
-      error: "Invalid username",
-    };
-  }
+  const email = formData.get("email");
+
   const password = formData.get("password");
   if (
     typeof password !== "string" ||
@@ -32,7 +23,7 @@ export async function login(formData: FormData) {
   }
 
   const existingUser = await db.query.userTable.findFirst({
-    where: eq(userTable.username, username.toLowerCase()),
+    where: eq(userTable.email, email.toLowerCase()),
   });
   if (!existingUser) {
     // NOTE:
