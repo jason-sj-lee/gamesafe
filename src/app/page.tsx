@@ -9,39 +9,6 @@ export default async function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE]">
-      {/* <header className="bg-[#006D77] p-4 shadow-md ">
-        <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <Logo className="w-10 h-10 text-[#E29578]" />
-            <span className="text-white text-2xl font-bold">Gamesafe</span>
-          </Link>
-          <nav>
-            {!user ? (
-              <>
-                <Link href="/login ">
-                  <Button
-                    variant="ghost"
-                    className="text-white hover:text-[#E29578] mr-2"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/signup ">
-                  <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77]">
-                    Sign Up
-                  </Button>
-                </Link>
-              </>
-            ) : (
-              <form action={logout}>
-                <Button className="bg-[#E29578] hover:bg-[#D88469] text-[#006D77]">
-                  Logout
-                </Button>
-              </form>
-            )}
-          </nav>
-        </div>
-      </header> */}
       <NavBar user={user} />
 
       <main className="container mx-auto px-4 py-16">

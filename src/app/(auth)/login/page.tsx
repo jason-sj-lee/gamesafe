@@ -24,13 +24,13 @@ export default function LoginPage() {
 
           <form action={login} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-[#006D77]">
-                Username
+              <Label htmlFor="email" className="text-[#006D77]">
+                Email
               </Label>
               <Input
-                id="username"
-                name="username"
-                type="text"
+                id="email"
+                name="email"
+                type="email"
                 required
                 className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
               />

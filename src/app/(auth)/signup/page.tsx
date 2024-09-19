@@ -1,11 +1,36 @@
-import { Button } from "@/app/ui/button";
+"use client";
+
+import { Button } from "@/app//ui/button";
 import { Input } from "@/app/ui/input";
 import { Label } from "@/app/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/ui/select";
+import { Textarea } from "@/app/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/ui/tabs";
 import Link from "next/link";
 import Logo from "@/app/ui/gamesafe-logo";
+import { useState } from "react";
 import { signup } from "./actions";
 
 export default function SignupPage() {
+  const [accountType, setAccountType] = useState<"therapist" | "organizer">(
+    "therapist"
+  );
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    formData.append("accountType", accountType);
+    // Add your form submission logic here
+    console.log(Object.fromEntries(formData));
+    await signup(formData);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#006D77] to-[#83C5BE] flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-md">
@@ -21,15 +46,54 @@ export default function SignupPage() {
             Create an account
           </h1>
 
-          <form action={signup} className="space-y-6">
+          <Tabs
+            defaultValue="therapist"
+            className="mb-6"
+            onValueChange={(value) =>
+              setAccountType(value as "therapist" | "organizer")
+            }
+          >
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="therapist">Athletic Therapist</TabsTrigger>
+              <TabsTrigger value="organizer">Event Organizer</TabsTrigger>
+            </TabsList>
+          </Tabs>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-[#006D77]">
-                Username
+              <Label htmlFor="firstname" className="text-[#006D77]">
+                First Name
               </Label>
               <Input
-                id="username"
-                name="username"
+                id="firstname"
+                name="firstname"
                 type="text"
+                required
+                className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="lastname" className="text-[#006D77]">
+                Last Name
+              </Label>
+              <Input
+                id="lastname"
+                name="lastname"
+                type="text"
+                required
+                className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-[#006D77]">
+                Email
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
                 required
                 className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
               />
@@ -47,6 +111,64 @@ export default function SignupPage() {
                 className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirm" className="text-[#006D77]">
+                Confirm Password
+              </Label>
+              <Input
+                id="confirm"
+                name="confirm"
+                type="password"
+                required
+                className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+              />
+            </div>
+
+            {accountType === "therapist" && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="certification" className="text-[#006D77]">
+                    Certification Number
+                  </Label>
+                  <Input
+                    id="certification"
+                    name="certification"
+                    type="text"
+                    required
+                    className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+                  />
+                </div>
+              </>
+            )}
+
+            {accountType === "organizer" && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="organization" className="text-[#006D77]">
+                    Organization Name
+                  </Label>
+                  <Input
+                    id="organization"
+                    name="organization"
+                    type="text"
+                    required
+                    className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="eventTypes" className="text-[#006D77]">
+                    Event Types
+                  </Label>
+                  <Textarea
+                    id="eventTypes"
+                    name="eventTypes"
+                    placeholder="e.g., Marathons, Football tournaments, etc."
+                    className="border-[#83C5BE] focus:border-[#E29578] focus:ring-[#E29578]"
+                  />
+                </div>
+              </>
+            )}
 
             <Button
               type="submit"

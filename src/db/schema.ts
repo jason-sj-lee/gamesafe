@@ -1,9 +1,18 @@
-import { pgTable, text, timestamp, date } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, date, pgEnum } from "drizzle-orm/pg-core";
+
+export const accountTypeEnum = pgEnum("accountType", [
+  "therapist",
+  "organizer",
+]);
 
 export const userTable = pgTable("user", {
   id: text("id").primaryKey(),
-  username: text("username").notNull().unique(),
+  email: text("email").notNull(),
   password_hash: text("password_hash").notNull(),
+  firstname: text("firstname").notNull(),
+  lastname: text("lastname").notNull(),
+  accountType: accountTypeEnum("accountType"),
+  certification: text("certification"),
 });
 
 export const sessionTable = pgTable("session", {
